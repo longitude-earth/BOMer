@@ -1,7 +1,7 @@
 <img width="1045" alt="Screenshot 2022-08-23 at 19 06 35" src="https://user-images.githubusercontent.com/8660802/186220674-0a0197be-3b74-4c80-921d-177888d7fd3f.png">
 
 
-# BOMer -simple bill of material-
+# BOMer -simple bill of materials-
 
 Simple open source app to create bill of materials (BOMs) and manage production cycles of simple products. 
 
