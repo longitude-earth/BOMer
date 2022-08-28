@@ -1,15 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { trpc } from "../utils/trpc";
-
-type TechnologyCardProps = {
-  name: string;
-  description: string;
-  documentation: string;
-};
+import Link from "next/link";
 
 const Home: NextPage = () => {
-  //const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
 
   return (
     <>
@@ -26,7 +19,12 @@ const Home: NextPage = () => {
         <div className="text-1xl md:text-2xl font-bold text-gray-600 mt-0">
           Simple Bill of Materials 
         </div>
-
+        <div className="pt-5">
+          <Link href={'/sales'}>Sales </Link> |
+          <Link href={'/products'}>Products </Link> |
+          <Link href={'/materials'}>Materials </Link> |
+          <Link href={'/suppliers'}>Suppliers </Link> 
+        </div>
       </main>
     </>
   );

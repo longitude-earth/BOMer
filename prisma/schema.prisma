@@ -62,24 +62,43 @@ model VerificationToken {
 //BOMer data model
 
 model Product {
-  id                  Int                   @id @default(autoincrement())
-  erpId               String?
-  name                String?
-  description         String?               @unique
-  pricePurchase       Decimal?
-  priceSell           Decimal?
-  supplier            Supplier?             @relation(fields: [supplierId], references: [id])
-  supplierId          Int?
-  Bom                 Bom[]
-  SalesOrderLine      SalesOrderLine[]
-  leadTimeDays        Int? //avg lead time to get the part
-  moq                 Int? //minimum order quantity
-  eoq                 Int? //economic order quantity
-  reorderQty          Int? //at what point should a new part be ordered
-  createdAt           DateTime              @default(now())
-  productTagOnProduct productTagOnProduct[]
-  updatedAt           DateTime              @updatedAt
-  IsPartOfBoms        BomEntry[]
+  id                    Int                   @id @default(autoincrement())
+  erpId                 String?
+  name                  String?
+  description           String?               @unique
+  pricePurchase         Decimal? //when product is bought this can be set
+  priceSell             Decimal?
+  productIsSupplied     Boolean
+  productIsManufactured Boolean
+  supplierId            Int?
+  Bom                   Bom[]
+  SalesOrderLine        SalesOrderLine[]
+  leadTimeDays          Int? //avg lead time to get the part
+  moq                   Int? //minimum order quantity
+  eoq                   Int? //economic order quantity
+  reorderQty            Int? //at what point should a new part be ordered
+  createdAt             DateTime              @default(now())
+  productTagOnProduct   productTagOnProduct[]
+  updatedAt             DateTime              @updatedAt
+  Supplier              Supplier?             @relation(fields: [supplierId], references: [id])
+}
+
+model Material {
+  id            Int        @id @default(autoincrement())
+  erpId         String?
+  name          String?
+  description   String?    @unique
+  pricePurchase Decimal?
+  priceSell     Decimal?
+  supplier      Supplier?  @relation(fields: [supplierId], references: [id])
+  supplierId    Int?
+  leadTimeDays  Int? //avg lead time to get the part
+  moq           Int? //minimum order quantity
+  eoq           Int? //economic order quantity
+  reorderQty    Int? //at what point should a new part be ordered
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  IsPartOfBoms  BomEntry[]
 }
 
 model ProductTag {
@@ -101,8 +120,8 @@ model productTagOnProduct {
 }
 
 model Supplier {
-  id        Int       @id @default(autoincrement())
-  name      String?   @unique
+  id        Int        @id @default(autoincrement())
+  name      String?    @unique
   vat       String?
   iban      String?
   bic       String?
@@ -111,8 +130,9 @@ model Supplier {
   website   String?
   shop      String?
   Product   Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Material  Material[]
 }
 
 model Bom {
@@ -143,14 +163,14 @@ model BomCategoryOnBom {
 }
 
 model BomEntry {
-  id        Int      @id @default(autoincrement())
-  product   Product  @relation(fields: [productId], references: [id])
-  productId Int
-  bom       Bom      @relation(fields: [bomId], references: [id])
-  bomId     Int
-  quantity  Decimal //number of times that product goes in bom
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int       @id @default(autoincrement())
+  bom        Bom       @relation(fields: [bomId], references: [id])
+  bomId      Int
+  quantity   Decimal //number of times that product goes in bom
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Material   Material? @relation(fields: [materialId], references: [id])
+  materialId Int?
 }
 
 model SalesOrder {
