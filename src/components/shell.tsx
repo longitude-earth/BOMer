@@ -12,7 +12,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 let navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
+    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
     { name: 'Sales Orders', href: '#', icon: UsersIcon, current: false },
     { name: 'Purchase Orders', href: '#', icon: FolderIcon, current: false },
     { name: 'Products', href: '/products', icon: CalendarIcon, current: false },
