@@ -30,7 +30,7 @@ export const Shell = ({ children, title }: ShellProps) => {
         return route === router.route
     }
 
-    let navigation = [
+    const navigation = [
         { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: onRoute('/dashboard') },
         { name: 'Sales Orders', href: '/sales', icon: CurrencyEuroIcon, current:  onRoute('/sales') },
         { name: 'Purchase Orders', href: '/purchases', icon: FolderIcon,  current: onRoute('/purchases') },
