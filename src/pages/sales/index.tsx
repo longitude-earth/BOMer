@@ -4,13 +4,15 @@ import { formatToCurrency } from "../../utils/formatters";
 import Link from "next/link";
 
 export default function SalesPage() {
-    const products = trpc.useQuery(["products.getAll"]).data;
+    const sales = trpc.useQuery(["sales.getAll"]).data;
+
+    console.log('sales:: ', sales)
 
     return (
         <Shell title="Sales">
             <div className="">
                 <div className="container">
-                    {products
+                    {sales
                         ?
                         <div className="">
                             <div className="mt-4 flex flex-col">
@@ -30,32 +32,21 @@ export default function SalesPage() {
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Name
+                                                            Ref
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Description
+                                                            Integration
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            MOQ
+                                                            Total Price
                                                         </th>
-                                                        <th
-                                                            scope="col"
-                                                            className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                                        >
-                                                            Purchase price
-                                                        </th>
-                                                        <th
-                                                            scope="col"
-                                                            className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                                        >
-                                                            Sell price
-                                                        </th>
+
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -68,22 +59,24 @@ export default function SalesPage() {
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                                    {products.map((product) => (
-                                                        <tr key={product.id}>
+                                                    {sales.map((sale) => (
+                                                        <tr key={sale.id}>
                                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                                <Link href={`/products/${product.id}`}>{`#${product.id}`}</Link>
+                                                                <Link href={`/sales/${sale.id}`}>{`#${sale.id}`}</Link>
                                                             </td>
                                                             <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                                                {product.name}
+                                                                {sale.ref}
                                                             </td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{product.description}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{product.eoq}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{formatToCurrency(product.pricePurchase)}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{formatToCurrency(product.priceSell)}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{product.createdAt.toLocaleDateString()}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                                <span className={`inline-flex rounded-full bg-${sale?.Integration?.color}-100 px-2 text-xs font-semibold leading-5 text-${sale?.Integration?.color}-800`}>
+                                                                    {sale?.Integration?.name}
+                                                                </span>
+                                                            </td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{formatToCurrency(sale.totalPrice)}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{sale.createdAt.toLocaleDateString()}</td>
                                                             <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                                 <Link href="#" >
-                                                                    <a className="text-indigo-600 hover:text-indigo-900">Edit<span className="sr-only">, {product.id}</span></a>
+                                                                    <a className="text-indigo-600 hover:text-indigo-900">Open<span className="sr-only">, {sale.id}</span></a>
                                                                 </Link>
                                                             </td>
                                                         </tr>

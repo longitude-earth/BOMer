@@ -1,4 +1,3 @@
-import { trpc } from "../../utils/trpc";
 import { useRouter } from 'next/router'
 
 export default function MaterialPage() {

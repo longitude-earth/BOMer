@@ -14,7 +14,7 @@ export default function Breadcrumb({ pages }: { pages: page[] }) {
             <ol role="list" className="flex space-x-4 rounded-md bg-white px-6 shadow">
                 <li className="flex">
                     <div className="flex items-center">
-                        <Link href="#" >
+                        <Link href="/dashboard" >
                             <a className="text-gray-400 hover:text-gray-500">
                                 <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
                                 <span className="sr-only">Home</span>

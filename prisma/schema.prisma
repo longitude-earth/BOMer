@@ -77,20 +77,20 @@ model Product {
 }
 
 model Material {
-  id            Int        @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   erpId         String?
   name          String?
-  description   String?    @unique
-  pricePurchase Decimal    @default(0)
-  priceSell     Decimal    @default(0)
-  supplier      Supplier?  @relation(fields: [supplierId], references: [id])
+  description   String?      @unique
+  pricePurchase Decimal      @default(0)
+  priceSell     Decimal      @default(0)
+  supplier      Supplier?    @relation(fields: [supplierId], references: [id])
   supplierId    Int?
   leadTimeDays  Int? //avg lead time to get the part
   moq           Int? //minimum order quantity
   eoq           Int? //economic order quantity
   reorderQty    Int? //at what point should a new part be ordered
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   IsPartOfBoms  BomEntry[]
 }
 
@@ -172,6 +172,9 @@ model SalesOrder {
   SalesOrderLine SalesOrderLine[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
+  totalPrice     Decimal
+  Integration    Integration      @relation(fields: [integrationId], references: [id])
+  integrationId  Int
 }
 
 model SalesOrderLine {
@@ -183,4 +186,11 @@ model SalesOrderLine {
   quantity       Decimal?
   priceProduct   Decimal?
   priceLineTotal Decimal? //quantity*priceProduct
+}
+
+model Integration {
+  id         Int          @id @default(autoincrement())
+  name       String
+  color      String
+  SalesOrder SalesOrder[]
 }
