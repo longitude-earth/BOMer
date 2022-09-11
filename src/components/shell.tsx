@@ -9,15 +9,9 @@ import {
     InboxIcon,
     UsersIcon,
     XMarkIcon,
+    CurrencyEuroIcon
 } from '@heroicons/react/24/outline'
 
-let navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-    { name: 'Sales Orders', href: '#', icon: UsersIcon, current: false },
-    { name: 'Purchase Orders', href: '#', icon: FolderIcon, current: false },
-    { name: 'Products', href: '/products', icon: CalendarIcon, current: false },
-    { name: 'Materials', href: '/materials', icon: InboxIcon, current: false },
-]
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -28,17 +22,22 @@ type ShellProps = {
     title?: string
 }
 
+
 export const Shell = ({ children, title }: ShellProps) => {
     const router = useRouter()
 
-    useEffect(() => {
-        console.log('Router : ', router.route)
-        navigation = navigation.map(nav => {
-            if(nav.href === router.route) return {...nav, current: true}
-            else return {...nav, current: false}
-        })
-    }, [router.route])
+    const onRoute = (route: string) => {
+        return route === router.route
+    }
 
+    let navigation = [
+        { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: onRoute('/dashboard') },
+        { name: 'Sales Orders', href: '/sales', icon: CurrencyEuroIcon, current:  onRoute('/sales') },
+        { name: 'Purchase Orders', href: '/purchases', icon: FolderIcon,  current: onRoute('/purchases') },
+        { name: 'Products', href: '/products', icon: CalendarIcon, current:  onRoute('/products') },
+        { name: 'Materials', href: '/materials', icon: InboxIcon, current:  onRoute('/materials') },
+        { name: 'Suppliers', href: '/suppliers', icon: UsersIcon, current:  onRoute('/suppliers') },
+    ]
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
     return (
@@ -131,7 +130,7 @@ export const Shell = ({ children, title }: ShellProps) => {
                                                 />
                                             </div>
                                             <div className="ml-3">
-                                                <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                                                <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
                                                 <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                                             </div>
                                         </div>
@@ -148,11 +147,8 @@ export const Shell = ({ children, title }: ShellProps) => {
             <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
-                    <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-                        <div className="flex flex-shrink-0 items-center px-4 font-bold text-2xl">
-                            BOMer
-                        </div>
-                        <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
+                    <div className="flex flex-1 flex-col overflow-y-auto">
+                        <nav className="mt-2 flex-1 space-y-1 bg-white px-2">
                             {navigation.map((item) => (
                                 <a
                                     key={item.name}
@@ -175,17 +171,10 @@ export const Shell = ({ children, title }: ShellProps) => {
                         </nav>
                     </div>
                     <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                        <a href="#" className="group block w-full flex-shrink-0">
+                        <a href="/settings" className="group block w-full flex-shrink-0">
                             <div className="flex items-center">
                                 <div>
-                                    <img
-                                        className="inline-block h-9 w-9 rounded-full"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt=""
-                                    />
-                                </div>
-                                <div className="ml-3">
-                                    <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                                    <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
                                     <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                                 </div>
                             </div>
@@ -205,16 +194,14 @@ export const Shell = ({ children, title }: ShellProps) => {
                     </button>
                 </div>
                 <main className="flex-1">
-                    <div className="py-6">
+                    <div className="py-4">
                         <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8">
                             <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
                         </div>
                         <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8">
-                            {/* Replace with your content */}
-                            <div className="py-4">
+                            <div className="pb-4">
                                 {children}
                             </div>
-                            {/* /End replace */}
                         </div>
                     </div>
                 </main>

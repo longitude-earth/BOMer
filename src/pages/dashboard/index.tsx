@@ -1,11 +1,13 @@
-import { Shell } from "../components/shell";
+import { trpc } from "../../utils/trpc";
+import { Shell } from "../../components/shell";
+import { formatToCurrency } from "../../utils/formatters";
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function DashBoardPage() {
+export default function PurchasesPage() {
     const stats = [
         { name: 'Total Sales', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
         { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
@@ -13,10 +15,8 @@ export default function DashBoardPage() {
     ]
 
     return (
-        <Shell>
-
-            <div>
-                <h3 className="text-2xl font-medium leading-6 text-gray-900">Dashboard</h3>
+        <Shell title="DashBoard">
+                       <div>
                 <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
                     {stats.map((item) => (
                         <div key={item.name} className="px-4 py-5 sm:p-6">

@@ -3,11 +3,11 @@ import { Shell } from "../../components/shell";
 import { formatToCurrency } from "../../utils/formatters";
 import Link from "next/link";
 
-export default function ProductsPage() {
+export default function PurchasesPage() {
     const products = trpc.useQuery(["products.getAll"]).data;
 
     return (
-        <Shell title="Products">
+        <Shell title="Purchases">
             <div className="">
                 <div className="container">
                     {products

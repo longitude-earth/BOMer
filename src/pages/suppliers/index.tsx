@@ -1,16 +1,14 @@
 import { trpc } from "../../utils/trpc";
 import { Shell } from "../../components/shell";
-import { formatToCurrency } from "../../utils/formatters";
 import Link from "next/link";
 
 export default function ProductsPage() {
-    const products = trpc.useQuery(["products.getAll"]).data;
+    const suppliers = trpc.useQuery(["suppliers.getAll"]).data;
 
     return (
-        <Shell title="Products">
+        <Shell title="Suppliers">
             <div className="">
-                <div className="container">
-                    {products
+                    {suppliers
                         ?
                         <div className="">
                             <div className="mt-4 flex flex-col">
@@ -36,31 +34,31 @@ export default function ProductsPage() {
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Description
+                                                            Email
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            MOQ
+                                                            VAT
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Purchase price
+                                                            Phone
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Sell price
+                                                            Website
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                         >
-                                                            Created
+                                                            Webshop
                                                         </th>
                                                         <th scope="col" className="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6">
                                                             <span className="sr-only">Edit</span>
@@ -68,22 +66,22 @@ export default function ProductsPage() {
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                                    {products.map((product) => (
-                                                        <tr key={product.id}>
+                                                    {suppliers.map((supplier) => (
+                                                        <tr key={supplier.id}>
                                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                                <Link href={`/products/${product.id}`}>{`#${product.id}`}</Link>
+                                                                <Link href={`/products/${supplier.id}`}>{`#${supplier.id}`}</Link>
                                                             </td>
                                                             <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                                                {product.name}
+                                                                {supplier.name}
                                                             </td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{product.description}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{product.eoq}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{formatToCurrency(product.pricePurchase)}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{formatToCurrency(product.priceSell)}</td>
-                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{product.createdAt.toLocaleDateString()}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{supplier.email}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{supplier.vat}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{supplier.phone}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{supplier.website}</td>
+                                                            <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{supplier.shop}</td>
                                                             <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                                 <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                                    Edit<span className="sr-only">, {product.id}</span>
+                                                                    Edit<span className="sr-only">, {supplier.id}</span>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -97,7 +95,6 @@ export default function ProductsPage() {
                         </div>
                         :
                         <p>Loading..</p>}
-                </div>
             </div>
         </Shell>
     )

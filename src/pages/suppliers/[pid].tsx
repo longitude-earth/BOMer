@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Shell } from "../../components/shell";
 import { PaperClipIcon } from '@heroicons/react/20/solid'
 import { formatToCurrency } from "../../utils/formatters";
-import Breadcrumb from "../../components/breadcrumbs";
+import { Decimal } from "@prisma/client/runtime";
 
 export default function ProductPage() {
     const router = useRouter()
@@ -11,19 +11,12 @@ export default function ProductPage() {
 
     const { data, isLoading } = trpc.useQuery(["products.get", { id: parseInt(pid?.toString() || '0') }]);
 
-    const pages = [
-        {name: 'Products', href:  '/products', current: false },
-        {name: `#${data?.id}`, href:  '/products', current: true }
-    ]
-
     if (isLoading) return (<div>loading...</div>)
 
     return (
-        <Shell>
+        <Shell title={`${data?.name}`}>
             <>
-                <div className="pb-4">
-                    <Breadcrumb pages={pages}/>
-                </div>
+
                 <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                     <div className="px-4 py-5 sm:px-6">
                         <h3 className="text-lg font-medium leading-6 text-gray-900">{data?.name}</h3>
