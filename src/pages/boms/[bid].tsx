@@ -15,7 +15,5 @@ export default function BomPage() {
                 <div><pre>{JSON.stringify(data, null, 2) }</pre></div>
             }
         </div>
-
     )
-
 }

@@ -81,9 +81,11 @@ export default function MaterialsPage() {
                                                     <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{formatToCurrency(material.priceSell)}</td>
                                                     <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{material.createdAt.toLocaleDateString()}</td>
                                                     <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                                                        <Link href="#" >
+                                                            <a className="text-indigo-600 hover:text-indigo-900">
                                                             Edit<span className="sr-only">, {material.id}</span>
-                                                        </a>
+                                                            </a>
+                                                        </Link>
                                                     </td>
                                                 </tr>
                                             ))}

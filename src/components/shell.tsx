@@ -33,11 +33,11 @@ export const Shell = ({ children, title }: ShellProps) => {
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: onRoute('/dashboard') },
-        { name: 'Sales Orders', href: '/sales', icon: CurrencyEuroIcon, current:  onRoute('/sales') },
-        { name: 'Purchase Orders', href: '/purchases', icon: FolderIcon,  current: onRoute('/purchases') },
-        { name: 'Products', href: '/products', icon: CalendarIcon, current:  onRoute('/products') },
-        { name: 'Materials', href: '/materials', icon: InboxIcon, current:  onRoute('/materials') },
-        { name: 'Suppliers', href: '/suppliers', icon: UsersIcon, current:  onRoute('/suppliers') },
+        { name: 'Sales Orders', href: '/sales', icon: CurrencyEuroIcon, current: onRoute('/sales') },
+        { name: 'Purchase Orders', href: '/purchases', icon: FolderIcon, current: onRoute('/purchases') },
+        { name: 'Products', href: '/products', icon: CalendarIcon, current: onRoute('/products') },
+        { name: 'Materials', href: '/materials', icon: InboxIcon, current: onRoute('/materials') },
+        { name: 'Suppliers', href: '/suppliers', icon: UsersIcon, current: onRoute('/suppliers') },
     ]
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -98,43 +98,47 @@ export const Shell = ({ children, title }: ShellProps) => {
                                     </div>
                                     <nav className="mt-5 space-y-1 px-2">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
                                                 href={item.href}
-                                                className={classNames(
+
+                                            >
+                                                <a className={classNames(
                                                     item.current
                                                         ? 'bg-gray-100 text-gray-900'
                                                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                                     'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                                                )}
-                                            >
-                                                <item.icon
-                                                    className={classNames(
-                                                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                                        'mr-4 flex-shrink-0 h-6 w-6'
-                                                    )}
-                                                    aria-hidden="true"
-                                                />
-                                                {item.name}
-                                            </a>
+                                                )}>
+                                                    <item.icon
+                                                        className={classNames(
+                                                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                                            'mr-4 flex-shrink-0 h-6 w-6'
+                                                        )}
+                                                        aria-hidden="true"
+                                                    />
+                                                    {item.name}
+                                                </a>
+                                            </Link>
                                         ))}
                                     </nav>
                                 </div>
                                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                                    <Link href="#" className="group block flex-shrink-0">
-                                        <div className="flex items-center">
-                                            <div>
-                                                <img
-                                                    className="inline-block h-10 w-10 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt=""
-                                                />
+                                    <Link href="#" >
+                                        <a className="group block flex-shrink-0">
+                                            <div className="flex items-center">
+                                                <div>
+                                                    <img
+                                                        className="inline-block h-10 w-10 rounded-full"
+                                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div className="ml-3">
+                                                    <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
+                                                    <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View settings</p>
+                                                </div>
                                             </div>
-                                            <div className="ml-3">
-                                                <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
-                                                <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View settings</p>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </Link>
                                 </div>
                             </Dialog.Panel>
@@ -151,35 +155,38 @@ export const Shell = ({ children, title }: ShellProps) => {
                     <div className="flex flex-1 flex-col overflow-y-auto">
                         <nav className="mt-2 flex-1 space-y-1 bg-white px-2">
                             {navigation.map((item) => (
-                                <a
+                                <Link
                                     key={item.name}
                                     href={item.href}
-                                    className={classNames(
+                                >
+                                    <a className={classNames(
                                         item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                         'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                                    )}
-                                >
-                                    <item.icon
-                                        className={classNames(
-                                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                            'mr-3 flex-shrink-0 h-6 w-6'
-                                        )}
-                                        aria-hidden="true"
-                                    />
-                                    {item.name}
-                                </a>
+                                    )}>
+                                        <item.icon
+                                            className={classNames(
+                                                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                                'mr-3 flex-shrink-0 h-6 w-6'
+                                            )}
+                                            aria-hidden="true"
+                                        />
+                                        {item.name}
+                                    </a>
+                                </Link>
                             ))}
                         </nav>
                     </div>
                     <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                        <a href="/settings" className="group block w-full flex-shrink-0">
-                            <div className="flex items-center">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
-                                    <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                        <Link href="/settings" >
+                            <a className="group block w-full flex-shrink-0">
+                                <div className="flex items-center">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
+                                        <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View settings</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>

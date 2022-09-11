@@ -4,6 +4,7 @@ import { Shell } from "../../components/shell";
 import { PaperClipIcon } from '@heroicons/react/20/solid'
 import { formatToCurrency } from "../../utils/formatters";
 import { Decimal } from "@prisma/client/runtime";
+import Link from "next/link";
 
 export default function ProductPage() {
     const router = useRouter()
@@ -58,9 +59,11 @@ export default function ProductPage() {
                                                 <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Download
-                                                </a>
+                                            <Link href="#" >
+                                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        Download
+                                                    </a>
+                                                </Link>
                                             </div>
                                         </li>
                                         <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -69,9 +72,11 @@ export default function ProductPage() {
                                                 <span className="ml-2 w-0 flex-1 truncate">coverletter_back_end_developer.pdf</span>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Download
-                                                </a>
+                                            <Link href="#" >
+                                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        Download
+                                                    </a>
+                                                </Link>
                                             </div>
                                         </li>
                                     </ul>

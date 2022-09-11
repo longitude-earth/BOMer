@@ -4,6 +4,7 @@ import { Shell } from "../../components/shell";
 import { PaperClipIcon } from '@heroicons/react/20/solid'
 import { formatToCurrency } from "../../utils/formatters";
 import Breadcrumb from "../../components/breadcrumbs";
+import Link from "next/link";
 
 export default function ProductPage() {
     const router = useRouter()
@@ -12,8 +13,8 @@ export default function ProductPage() {
     const { data, isLoading } = trpc.useQuery(["products.get", { id: parseInt(pid?.toString() || '0') }]);
 
     const pages = [
-        {name: 'Products', href:  '/products', current: false },
-        {name: `#${data?.id}`, href:  '/products', current: true }
+        { name: 'Products', href: '/products', current: false },
+        { name: `#${data?.id}`, href: '/products', current: true }
     ]
 
     if (isLoading) return (<div>loading...</div>)
@@ -22,7 +23,7 @@ export default function ProductPage() {
         <Shell>
             <>
                 <div className="pb-4">
-                    <Breadcrumb pages={pages}/>
+                    <Breadcrumb pages={pages} />
                 </div>
                 <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                     <div className="px-4 py-5 sm:px-6">
@@ -65,9 +66,11 @@ export default function ProductPage() {
                                                 <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Download
-                                                </a>
+                                                <Link href="#" >
+                                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        Download
+                                                    </a>
+                                                </Link>
                                             </div>
                                         </li>
                                         <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -76,9 +79,11 @@ export default function ProductPage() {
                                                 <span className="ml-2 w-0 flex-1 truncate">coverletter_back_end_developer.pdf</span>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Download
-                                                </a>
+                                                <Link href="#" >
+                                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        Download
+                                                    </a>
+                                                </Link>
                                             </div>
                                         </li>
                                     </ul>

@@ -1,6 +1,5 @@
 import { trpc } from "../../utils/trpc";
 import { Shell } from "../../components/shell";
-import { formatToCurrency } from "../../utils/formatters";
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
 
 function classNames(...classes: string[]) {
@@ -16,7 +15,7 @@ export default function PurchasesPage() {
 
     return (
         <Shell title="DashBoard">
-                       <div>
+            <div>
                 <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
                     {stats.map((item) => (
                         <div key={item.name} className="px-4 py-5 sm:p-6">
