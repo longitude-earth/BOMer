@@ -11,6 +11,7 @@ import {
     XMarkIcon,
     CurrencyEuroIcon
 } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 
 function classNames(...classes: string[]) {
@@ -120,7 +121,7 @@ export const Shell = ({ children, title }: ShellProps) => {
                                     </nav>
                                 </div>
                                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                                    <a href="#" className="group block flex-shrink-0">
+                                    <Link href="#" className="group block flex-shrink-0">
                                         <div className="flex items-center">
                                             <div>
                                                 <img
@@ -131,10 +132,10 @@ export const Shell = ({ children, title }: ShellProps) => {
                                             </div>
                                             <div className="ml-3">
                                                 <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
-                                                <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                                                <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View settings</p>
                                             </div>
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
