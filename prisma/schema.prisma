@@ -57,10 +57,10 @@ model VerificationToken {
 model Product {
   id                    Int                   @id @default(autoincrement())
   erpId                 String?
-  name                  String?
-  description           String?               @unique
-  pricePurchase         Decimal? //when product is bought this can be set
-  priceSell             Decimal?
+  name                  String
+  description           String
+  pricePurchase         Decimal               @default(0)
+  priceSell             Decimal               @default(0)
   productIsSupplied     Boolean
   productIsManufactured Boolean
   supplierId            Int?
@@ -81,8 +81,8 @@ model Material {
   erpId         String?
   name          String?
   description   String?    @unique
-  pricePurchase Decimal?
-  priceSell     Decimal?
+  pricePurchase Decimal    @default(0)
+  priceSell     Decimal    @default(0)
   supplier      Supplier?  @relation(fields: [supplierId], references: [id])
   supplierId    Int?
   leadTimeDays  Int? //avg lead time to get the part
