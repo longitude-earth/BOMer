@@ -21,15 +21,16 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    /*
+/*
     EmailProvider({
       server: env.EMAIL_SERVER,
       from: env.EMAIL_FROM
-    }),
+    }),*/
     GithubProvider({
       clientId: env.GITHUB_ID,
       clientSecret: env.GITHUB_SECRET,
     }),
+        /*
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET

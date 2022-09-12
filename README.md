@@ -20,3 +20,6 @@ Simple open source app to create bill of materials (BOMs) and manage production 
 - set shopify shoplevels to max producable products
 - get shopify orders automatically in your sales orders
 - one level BOMs
+
+
+Nextjs multi tenant: https://vercel.com/guides/nextjs-multi-tenant-application

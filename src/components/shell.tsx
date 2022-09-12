@@ -1,6 +1,7 @@
 import { Fragment, ReactNode, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
+import { useSession, signIn, signOut } from "next-auth/react"
 import {
     Bars3Icon,
     CalendarIcon,
@@ -25,6 +26,8 @@ type ShellProps = {
 
 
 export const Shell = ({ children, title }: ShellProps) => {
+    const { data: session } = useSession()
+
     const router = useRouter()
 
     const onRoute = (route: string) => {
@@ -41,6 +44,23 @@ export const Shell = ({ children, title }: ShellProps) => {
     ]
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
+    if (!session) {
+        return (
+            <>
+                Not signed in <br />
+                <Link href="/api/auth/signin">
+                    <a>
+                        Sign in
+                    </a>
+                </Link>
+            </>
+        )
+    }
+
+
+    console.log("user session: ", session)
+
     return (
         <div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -180,9 +200,16 @@ export const Shell = ({ children, title }: ShellProps) => {
                         <Link href="/settings" >
                             <a className="group block w-full flex-shrink-0">
                                 <div className="flex items-center">
+                                    <div className='mr-2'>
+                                        <img
+                                            className="inline-block h-10 w-10 rounded-full"
+                                            src={session.user?.image + ''}
+                                            alt=""
+                                        />
+                                    </div>
                                     <div>
-                                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Matthias Adriaens</p>
-                                        <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View settings</p>
+                                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{session.user?.name + ''}</p>
+                                        <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{session.user?.email + ''}</p>
                                     </div>
                                 </div>
                             </a>
@@ -203,10 +230,10 @@ export const Shell = ({ children, title }: ShellProps) => {
                 </div>
                 <main className="flex-1">
                     <div className="py-4">
-                        <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8">
+                        <div className="mx-auto px-4 sm:px-6 md:px-8">
                             <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
                         </div>
-                        <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8">
+                        <div className="mx-auto px-4 sm:px-6 md:px-8">
                             <div className="pb-4">
                                 {children}
                             </div>
