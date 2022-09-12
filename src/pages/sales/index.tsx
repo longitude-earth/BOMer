@@ -6,8 +6,6 @@ import Link from "next/link";
 export default function SalesPage() {
     const sales = trpc.useQuery(["sales.getAll"]).data;
 
-    console.log('sales:: ', sales)
-
     return (
         <Shell title="Sales">
             <div className="">
@@ -68,14 +66,14 @@ export default function SalesPage() {
                                                                 {sale.ref}
                                                             </td>
                                                             <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                                                <span className={`inline-flex rounded-full bg-${sale?.Integration?.color}-100 px-2 text-xs font-semibold leading-5 text-${sale?.Integration?.color}-800`}>
+                                                                <span className={`inline-flex rounded-full bg-${sale?.Integration?.color + ''}-100 px-2 text-xs font-semibold leading-5 text-${sale?.Integration?.color + ''}-800`}>
                                                                     {sale?.Integration?.name}
                                                                 </span>
                                                             </td>
                                                             <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{formatToCurrency(sale.totalPrice)}</td>
                                                             <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{sale.createdAt.toLocaleDateString()}</td>
                                                             <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                                <Link href="#" >
+                                                                <Link href={`/sales/${sale?.id}`} >
                                                                     <a className="text-indigo-600 hover:text-indigo-900">Open<span className="sr-only">, {sale.id}</span></a>
                                                                 </Link>
                                                             </td>
