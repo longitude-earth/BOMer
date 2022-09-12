@@ -22,7 +22,7 @@ export default function ProductPage() {
         // More projects...
       ]
 
-    if (isLoading) return (<div>loading...</div>)
+    if (isLoading) return (<Shell><></></Shell>)
 
     return (
         <Shell>
