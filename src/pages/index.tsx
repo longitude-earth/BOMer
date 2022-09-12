@@ -3,10 +3,13 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { Shell } from "../components/shell";
+import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
 
   const { data: session } = useSession()
+
+  const products = trpc.useQuery(["products.getAll"]).data;
 
   if (!session) {
     return (

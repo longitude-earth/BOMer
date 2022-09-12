@@ -1,11 +1,10 @@
 import { createRouter } from "./context";
 import {  z } from "zod";
-import { prisma } from "../db/client"
 
 export const bomsRouter = createRouter()
   .query("getAll", {
     async resolve({ctx}) {
-      return prisma.bom.findMany()
+      return ctx.prisma.bom.findMany()
     },
   })
   .query("get", {
